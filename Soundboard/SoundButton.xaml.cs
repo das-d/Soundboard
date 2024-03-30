@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -51,6 +52,13 @@ namespace Soundboard
                 SelectFile();
                 return;
             }
+
+            if (!File.Exists(SoundFile))
+            {
+                ButtonName = "File not found";
+                return;
+            }
+
 
             SoundPlayer.PlaySound(SoundFile, Volume, 0, int.MaxValue);
         }
