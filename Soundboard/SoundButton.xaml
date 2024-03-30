@@ -8,7 +8,7 @@
              Background="Transparent">
     <Grid>
         <Button Click="PlaySound" MouseRightButtonDown="ChangeFile">
-            <TextBlock Text="{Binding ButtonName, UpdateSourceTrigger=PropertyChanged}" TextTrimming="CharacterEllipsis" TextWrapping="Wrap"/>
+            <TextBlock Text="{Binding ButtonName, UpdateSourceTrigger=PropertyChanged}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
             <Button.Style>
                 <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonStyled}">
                     <Setter Property="IsHitTestVisible" Value="True"/>

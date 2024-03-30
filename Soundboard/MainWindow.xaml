@@ -49,7 +49,7 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Button Content="Delete Mode" Click="DeleteButtonMode" Margin="2.5" Height="30" Width="80">
+                <Button Content="Delete Mode" Click="DeleteButtonMode" Margin="2.5" Height="30" Width="80" Padding="0">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonStyled}">
                             <Style.Triggers>
