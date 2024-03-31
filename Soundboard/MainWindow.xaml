@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:control="clr-namespace:Soundboard.Controls"
         xmlns:local="clr-namespace:Soundboard"
         mc:Ignorable="d"
         Title="SoundBoard" Height="450" Width="800"
@@ -23,7 +24,7 @@
                             <ItemsPanelTemplate>
                                 <WrapPanel IsItemsHost="True">
                                     <WrapPanel.Resources>
-                                        <Style TargetType="{x:Type local:SoundButton}">
+                                        <Style TargetType="{x:Type control:SoundButton}">
                                             <Setter Property="Margin" Value="2.5" />
                                         </Style>
                                     </WrapPanel.Resources>

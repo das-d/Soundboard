@@ -1,5 +1,7 @@
 ﻿using NAudio.Wave;
 using Newtonsoft.Json;
+using Soundboard.Controls;
+using Soundboard.Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
