@@ -87,7 +87,7 @@ namespace Soundboard
 
         private void AddButton(object sender, RoutedEventArgs e)
         {
-            SoundButtons.Add(new SoundButton() { ButtonName = "New Button", Volume = 1.0f});
+            SoundButtons.Add(new SoundButton() { ButtonName = "New Button", Volume = 1.0f, Start = 0.0d, End = 0.0d});
         }
 
         private void DeleteButtonMode(object sender, RoutedEventArgs e)

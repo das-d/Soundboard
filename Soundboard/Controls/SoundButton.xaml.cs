@@ -38,6 +38,12 @@ namespace Soundboard.Controls
         [JsonProperty]
         public float Volume { get => _volume; set { _volume = value; OnPropertyChanged(); } }
 
+        [JsonProperty]
+        public double Start { get => _start; set { _start = value; OnPropertyChanged(); } }
+
+        [JsonProperty]
+        public double End { get => _end; set { _end = value; OnPropertyChanged(); } }
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public SoundButton()
@@ -61,7 +67,7 @@ namespace Soundboard.Controls
             }
 
 
-            SoundPlayer.PlaySound(SoundFile, Volume, 0, int.MaxValue);
+            SoundPlayer.PlaySound(SoundFile, Volume, Start, End);
         }
 
         private void ChangeFile(object sender, RoutedEventArgs e)
@@ -84,5 +90,7 @@ namespace Soundboard.Controls
         private string _buttonName;
         private bool _deleteMode;
         private float _volume;
+        private double _start;
+        private double _end;
     }
 }

@@ -15,7 +15,7 @@ namespace Soundboard
     {
         private static WaveOut _player = new WaveOut();
 
-        public static void PlaySound(string filePath, float volume, long startMS = 0, long endMS = long.MaxValue)
+        public static void PlaySound(string filePath, float volume, double startMS = 0, double endMS = long.MaxValue)
         {
             if (string.IsNullOrWhiteSpace(filePath)) return;
 
@@ -23,8 +23,8 @@ namespace Soundboard
 
             AudioFileReader audioFileReader = new AudioFileReader(filePath);
             OffsetSampleProvider trimmed = new OffsetSampleProvider(audioFileReader);
-            trimmed.SkipOver = TimeSpan.FromMilliseconds(startMS);
-            trimmed.Take = TimeSpan.FromMilliseconds(endMS);
+            trimmed.SkipOver = TimeSpan.FromMilliseconds(startMS*1000);
+            trimmed.Take = TimeSpan.FromMilliseconds((endMS-startMS)*1000);
 
             _player.Volume = volume;
             _player.Init(trimmed);

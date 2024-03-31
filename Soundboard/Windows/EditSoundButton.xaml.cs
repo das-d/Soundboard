@@ -1,7 +1,9 @@
-﻿using Soundboard.Controls;
+﻿using NAudio.Wave;
+using Soundboard.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -25,6 +27,13 @@ namespace Soundboard.Windows
     {
         public SoundButton SoundButton { get => _soundButton; set { _soundButton = value; } }
         private SoundButton _soundButton;
+        private double min;
+        private double max;
+        private double start;
+        private double end;
+
+        public double Min { get => min; set { min = value; OnPropertyChanged(); } }
+        public double Max { get => max; set { max = value; OnPropertyChanged(); } }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -34,6 +43,21 @@ namespace Soundboard.Windows
             DataContext = this;
             Owner = System.Windows.Application.Current.MainWindow;
             SoundButton = sndButton;
+
+            InitSoundFile();
+        }
+
+        private void InitSoundFile()
+        {
+            if (SoundButton.SoundFile == null || !File.Exists(SoundButton.SoundFile)) return;
+
+            AudioFileReader audioFileReader = new AudioFileReader(SoundButton.SoundFile);
+            Min = 0d;
+            Max = audioFileReader.TotalTime.TotalSeconds;
+            if (SoundButton.End == 0.0d || SoundButton.End > Max)
+            {
+                SoundButton.End = Max = audioFileReader.TotalTime.TotalSeconds;
+            }
         }
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)
@@ -52,8 +76,16 @@ namespace Soundboard.Windows
                 if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     SoundButton.SoundFile = ofd.FileName;
+                    SoundButton.Start = 0.0d;
+                    SoundButton.End = 0.0d;
+                    InitSoundFile();
                 }
             }
+        }
+
+        private void PlayPreview(object sender, RoutedEventArgs e)
+        {
+            SoundPlayer.PlaySound(SoundButton.SoundFile, SoundButton.Volume, SoundButton.Start, SoundButton.End);
         }
     }
 }
