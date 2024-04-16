@@ -19,16 +19,24 @@ namespace Soundboard
         {
             if (string.IsNullOrWhiteSpace(filePath)) return;
 
-            _player.Pause();
+            try
+            {
+                _player.Pause();
 
-            AudioFileReader audioFileReader = new AudioFileReader(filePath);
-            OffsetSampleProvider trimmed = new OffsetSampleProvider(audioFileReader);
-            trimmed.SkipOver = TimeSpan.FromMilliseconds(startMS*1000);
-            trimmed.Take = TimeSpan.FromMilliseconds((endMS-startMS)*1000);
+                AudioFileReader audioFileReader = new AudioFileReader(filePath);
+                OffsetSampleProvider trimmed = new OffsetSampleProvider(audioFileReader);
+                trimmed.SkipOver = TimeSpan.FromMilliseconds(startMS * 1000);
+                trimmed.Take = TimeSpan.FromMilliseconds((endMS - startMS) * 1000);
 
-            _player.Volume = volume;
-            _player.Init(trimmed);
-            _player.Play();
+                _player.Volume = volume;
+                _player.Init(trimmed);
+                _player.Play();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Problem");
+            }
+
         }
 
         public static void StopSound()
